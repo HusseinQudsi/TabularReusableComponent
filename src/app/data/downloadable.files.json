@@ -1,0 +1,37 @@
+{
+	"result": {
+		"downloadableFiles": [
+      {
+				"device": "device",
+				"name": "name",
+				"path": "path",
+				"status": "status"
+			},
+			{
+				"device": "device",
+				"name": "name",
+				"path": "path",
+				"status": "status"
+			},
+			{
+				"device": "device",
+				"name": "name",
+				"path": "path",
+				"status": "status"
+			},
+			{
+				"device": "device",
+				"name": "name",
+				"path": "path",
+				"status": "status"
+			},
+			{
+				"device": "device",
+				"name": "name",
+				"path": "path",
+				"status": "status"
+			}
+		],
+		"total": 5
+	}
+}
