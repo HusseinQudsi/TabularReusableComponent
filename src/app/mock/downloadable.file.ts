@@ -1,7 +1,6 @@
 import { v4 as uuidv4 } from 'uuid';
 import { ApiResponseModel } from '../models/api.response';
-
-export const DownloadableFilesData: ApiResponseModel = {
+export const downloadableFilesData: ApiResponseModel = {
   result: [
     {
       id: uuidv4(),

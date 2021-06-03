@@ -1,4 +1,9 @@
-<article>
-  <h1 class="card">whattt ups</h1>
-  <span>{{cashLeft()}}</span> 
-</article>
+<table>
+  <thead>
+    <tr table-header></tr>
+  </thead>
+  <tbody *ngFor="let row of downloadableItems.selectionItems">
+    <h6>{{ row.name }}</h6>
+    <tr table-row></tr>
+  </tbody>
+</table>

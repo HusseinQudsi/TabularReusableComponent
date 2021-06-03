@@ -1,7 +1,8 @@
-import { Component, OnInit } from '@angular/core';
-import { ApiResponseModel } from '../../models/api.response';
-import { DownloadableFilesService } from '../../services/downloadable.table.service';
+import { Component, OnDestroy, OnInit } from '@angular/core';
+import { Subscription } from 'rxjs';
 
+import { DownloadableItems } from '../../models/downloadable.file';
+import { DownloadableFilesService } from '../../services/downloadable.table.service';
 
 @Component({
   selector: 'downloadable-table',
@@ -10,17 +11,22 @@ import { DownloadableFilesService } from '../../services/downloadable.table.serv
   providers: [DownloadableFilesService]
 })
 
-export class DownloadableTable implements OnInit {
-  downloadableFiles: ApiResponseModel;
-  title = 'Downloadable files table';
-  
-  constructor(private downloadableFilesService: DownloadableFilesService) { }
+export class DownloadableTable implements OnInit, OnDestroy {
+  downloadableItems: DownloadableItems;
+  subscription: Subscription;
 
-  cashLeft() {
-    return console.log(this.downloadableFiles);
+  constructor(private downloadableFilesService: DownloadableFilesService) {
+    this.subscription = this
+      .downloadableFilesService
+      .initObservable()
+      .subscribe(items => this.downloadableItems = items);
+  }
+
+  ngOnDestroy() {
+    this.subscription.unsubscribe();
   }
 
   ngOnInit() {
-    this.downloadableFiles = this.downloadableFilesService.getDownloadableFiles();
+    this.downloadableFilesService.getDownloadableItems();
   }
 }

@@ -1,0 +1,42 @@
+{
+	"result": {
+		"downloadableFiles": [
+			{
+				"id": "?number",
+				"device": "$string",
+				"name": "$string",
+				"path": "$string",
+				"status": "$boolean"
+			},
+			{
+				"id": "?number",
+				"device": "$string",
+				"name": "$string",
+				"path": "$string",
+				"status": "$boolean"
+			},
+			{
+				"id": "?number",
+				"device": "$string",
+				"name": "$string",
+				"path": "$string",
+				"status": "$boolean"
+			},
+			{
+				"id": "?number",
+				"device": "$string",
+				"name": "$string",
+				"path": "$string",
+				"status": "$boolean"
+			},
+			{
+				"id": "?number",
+				"device": "$string",
+				"name": "$string",
+				"path": "$string",
+				"status": "$boolean"
+			},
+		],
+		"total": 5
+	}
+}
