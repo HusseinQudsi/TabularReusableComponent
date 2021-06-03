@@ -16,17 +16,30 @@ import { DownloadableFilesService } from '../../services/downloadable.table.serv
 export class DownloadableTable implements OnInit, OnDestroy {
   downloadableItems: DownloadableItems;
   subscription: Subscription;
+  subtitle: String;
+  title: String;
 
   constructor(public downloadableFilesService: DownloadableFilesService) {
     this.subscription = this
       .downloadableFilesService
       .initObservable()
       .subscribe(items => this.downloadableItems = items);
+    this.subtitle = 'Please select files to be download from the list below, only available files can be selected.';
+    this.title = 'downloadable files';
   }
 
-  getCountText() {
-    var selectedCount: number = this.downloadableItems.selectedCount;
+  getCountText(): string {
+    let selectedCount: number = this.downloadableItems.selectedCount;
+
     return selectedCount === 0 ? 'None Selected' : `Selected ${selectedCount}`;
+  }
+
+  isSelectedAll(): boolean {
+    return this.downloadableItems.isSelectedAll;
+  }
+
+  isIndeterminate(): boolean {
+    return !this.downloadableItems.isSelectedAll && !!this.downloadableItems.selectedCount
   }
 
   ngOnDestroy(): void {
@@ -37,8 +50,15 @@ export class DownloadableTable implements OnInit, OnDestroy {
     this.downloadableFilesService.getDownloadableItems();
   }
 
-  onInputChange(downloadableItem: DownloadableItem) {
+  onInputChange(downloadableItem: DownloadableItem): void {
     this.downloadableFilesService.updateSelection(downloadableItem);
+  }
+
+  openAlertBox(): void {
+    let selectedFilesInfo: string[] = this.downloadableFilesService.getAlertBoxContent();
+    let selectedFilesInfoText = selectedFilesInfo.length ? selectedFilesInfo.join('\n') : 'Please select a path';
+
+    alert(selectedFilesInfoText);
   }
 
   selectAll(event: Event): void {
@@ -50,17 +70,27 @@ export class DownloadableTable implements OnInit, OnDestroy {
   }
 
   selectInput(event: Event, downloadableItem: DownloadableItem): void {
+
     let target = event.target as HTMLElement;
-    let $tr = target.closest('tr') as HTMLTableRowElement;
 
-    if (!!$tr) {
+    if (target.tagName === 'INPUT') {
 
-      let $input = $tr.getElementsByTagName('input');
+      let $input = event.target as HTMLInputElement;
 
-      if (!!$input.length && !$input[0].disabled) {
+      downloadableItem.isChecked = $input.checked;
+    } else {
 
-        downloadableItem.isChecked = $input[0].checked = !$input[0].checked;
-        this.onInputChange(downloadableItem);
+      let $tr: HTMLTableRowElement = target.closest('tr') as HTMLTableRowElement;
+
+      if (!!$tr) {
+
+        let $input: HTMLCollectionOf<HTMLInputElement> = $tr.getElementsByTagName('input');
+
+        if (!!$input.length && !$input[0].disabled) {
+
+          downloadableItem.isChecked = $input[0].checked = !$input[0].checked;
+          this.onInputChange(downloadableItem);
+        }
       }
     }
   }

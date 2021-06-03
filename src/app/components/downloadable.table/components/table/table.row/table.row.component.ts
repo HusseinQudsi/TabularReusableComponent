@@ -12,7 +12,7 @@ export class TableRow {
   @Output() inputChange: EventEmitter<DownloadableItem> = new EventEmitter();
 
   getStatusText(status: string) {
-    return status === 'available' ? 'Available' : 'Scheduled';
+    return status == 'available' ? 'available' : 'scheduled';
   }
 
   onChange(downloadableFile: DownloadableItem, event: Event) {

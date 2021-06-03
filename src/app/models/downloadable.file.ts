@@ -1,4 +1,4 @@
-export class DownloadableFile {
+export interface DownloadableFile {
   device: string
   id?: string
   name: string
@@ -6,11 +6,11 @@ export class DownloadableFile {
   status: string
 }
 
-export class DownloadableItem extends DownloadableFile{
+export interface DownloadableItem extends DownloadableFile {
   isChecked: boolean
 }
 
-export class DownloadableItems {
+export interface DownloadableItems {
   errorState: boolean
   isSelectedAll: boolean
   selectedCount: number

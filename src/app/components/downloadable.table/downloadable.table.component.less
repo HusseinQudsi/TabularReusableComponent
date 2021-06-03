@@ -1,5 +1,12 @@
-// TODO: Running out of time, remove RGB values and use shared variable for consistence please.
+@primary-blue: #1C5679;
+@primary-beige: #BBB592;
+@hover-beige: #CAC3B2;
+@temp-1: #808C5C;
+@temp-2: #5F4B3B;
+
+
 .table-content {
+  background-color: beige;
   border-radius: 10px;
   box-shadow: 3px 3px 10px lightgrey;
   margin: 100px auto;
@@ -8,43 +15,53 @@
   width: 80%;
 }
 
-.selection-table {
-  padding: 10px;
+.table-content-subtitle {
+  font-size: 18px;
+  text-transform: initial;
 }
 
-.count-text {
-  padding: 0 15px;
+.selection-table {
+  padding: 10px;
+
+  .count-text {
+    font-size: 16px;
+    font-weight: 600;
+    padding: 0 15px;
+  }
+
+  .download-btn {
+    font-size: 16px;
+    padding: 5px;
+  }
 }
 
 .files-table {
   border-collapse: collapse;
   border-spacing: 0;
-  font-family: "Trebuchet MS", Arial, Helvetica, sans-serif;
   font-size: 16px;
   width: 100%;
 
   th {
-    background-color: rgba(66, 166, 70, 0.6);
+    background-color: rgba(66, 166, 70, 1);
     padding-bottom: 10px;
     padding-top: 10px;
   }
 
   td,
   th {
-    border: 1px solid darkgray;
+    border: none;
     padding: 10px;
     text-align: left;
   }
 }
 
 .files-table {
-
   tr:nth-child(odd) {
     background-color: rgba(66, 166, 70, 0.2);
   }
 
   tr:hover {
-    background-color: rgba(255, 173, 185, 0.5);
+    background-color: #69B7CE;
   }
 
   tr.is-selected {
@@ -59,5 +76,24 @@
 .files-table {
   .disable-checkbox:hover {
     background-color: rgba(255, 173, 185, 0.1);
+  }
+
+  .disable-checkbox:hover {
+    background-color: transparent;
+
+    &:nth-child(odd) {
+      background-color: rgba(66, 166, 70, 0.2);
+    }
+  }
+}
+
+@media screen and (max-width: 1200px) {
+  .table-responsive {
+    border: 1px solid #ddd;
+    margin-bottom: 15px;
+    min-height: .01%;
+    overflow-x: auto;
+    overflow-y: hidden;
+    width: 100%;
   }
 }

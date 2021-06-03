@@ -1,28 +1,30 @@
 <section class="table-content">
-  <h1>
-    Tabular Reusable Component
-  </h1>
+  <h2>{{this.title}}</h2>
+  <p class="table-content-subtitle">{{this.subtitle}}</p>
+  <br>
+
   <!-- TODO: add error state UI -->
   <div *ngIf="downloadableItems.errorState"></div>
+
   <div *ngIf="!downloadableItems.errorState">
+    
     <!-- Start: File selection menu table -->
     <table class="selection-table">
       <caption class="visuallyhidden">File selection menu table</caption>
       <tr>
-        <td>
-          <span>
-            <input [checked]="downloadableItems.isSelectedAll"
-              [disabled]="downloadableItems.selectionItems.length === 0" (change)="selectAll($event)" id="select-all"
-              type="checkbox">
-            <label for="select-all" class="visuallyhidden" type="text">Select all available downloads
-            </label>
-          </span>
+        <td>          
+          <input [checked]="isSelectedAll()" 
+            [indeterminate]="isIndeterminate()"
+            [disabled]="downloadableItems.selectionItems.length === 0" (change)="selectAll($event)" id="select-all"
+            type="checkbox">
+          <label for="select-all" class="visuallyhidden" type="text">Select all available downloads
+          </label>
         </td>
         <td>
           <span class="count-text">{{getCountText()}}</span>
         </td>
         <td>
-          <button class="btn">
+          <button class="btn download-btn" (click)="this.openAlertBox()">
             <i class="fa fa-download"></i> Download
           </button>
         </td>
@@ -30,18 +32,23 @@
     </table><!-- End: File selection menu table -->
 
     <!-- Start: Downloadable files selection table -->
-    <table class="files-table">
-      <caption class="visuallyhidden">Downloadable files selection table</caption>
-      <thead>
-        <tr table-header></tr>
-      </thead>
-      <tbody>
-        <tr *ngFor="let downloadableItem of downloadableItems.selectionItems"
-          [class.disable-checkbox]="!(this.downloadableItem.status === 'available')" [class.is-selected]="this.downloadableItem.isChecked"
-          [downloadableFile]="downloadableItem" (click)="this.selectInput($event, downloadableItem)"
-          (inputChange)="onInputChange($event)" table-row>
-        </tr>
-      </tbody>
-    </table> <!-- End: Downloadable files selection table -->
+    <div class="table-responsive">
+      <table class="files-table">
+        <caption class="visuallyhidden">Downloadable files selection table</caption>
+        <thead>
+          <tr table-header></tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let downloadableItem of downloadableItems.selectionItems"
+            [class.disable-checkbox]="!(this.downloadableItem.status=== 'available')"
+            [class.is-selected]="this.downloadableItem.isChecked"
+            (click)="this.selectInput($event, downloadableItem)"
+            [downloadableFile]="downloadableItem" 
+            (inputChange)="onInputChange($event)" table-row>
+          </tr>
+        </tbody>
+      </table> 
+    </div>
+    <!-- End: Downloadable files selection table -->
   </div>
 </section>

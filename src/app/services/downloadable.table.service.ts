@@ -71,6 +71,13 @@ export class DownloadableFilesService {
   }
 
   // Public properties:
+  getAlertBoxContent(): string[] {
+    return this
+      ._downloadableFilesData.selectionItems
+      .filter(file => file.isChecked)
+      .map(file => `Path: ${file.path}. File: ${file.device}.`);
+  }
+
   getDownloadableItems(): void {
     let downloadableFiles: ApiResponseModel = downloadableFilesData;
 
@@ -110,7 +117,7 @@ export class DownloadableFilesService {
 
   updateSelection(downloadableItem?: DownloadableItem): void {
 
-    var selectedCount: number = 0;
+    let selectedCount: number = 0;
 
     this._downloadableFilesData.selectionItems.forEach(file => {
       if (downloadableItem && file.id == downloadableItem.id) {

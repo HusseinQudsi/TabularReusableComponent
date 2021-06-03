@@ -1,17 +1,17 @@
 <td>
-    <span>
-        <input 
-            [checked]="downloadableFile.isChecked"
-            [disabled]="!(downloadableFile.status === 'available')"
-            [id]="downloadableFile.id" 
-            (change)="onChange(downloadableFile, $event)"
-            type="checkbox">
-        <label 
-            [for]="downloadableFile.id"
-            class="visuallyhidden" 
-            type="text">Downloadable File Status
-        </label>
-    </span>
+    <input 
+    [checked]="downloadableFile.isChecked"
+    [disabled]="!(downloadableFile.status === 'available')"
+    [id]="downloadableFile.id" 
+    (change)="onChange(downloadableFile, $event)"
+    type="checkbox">
+    <label 
+        [for]="downloadableFile.id"
+        class="visuallyhidden" 
+        type="text">Downloadable File Status
+    </label>
+</td>
+<td>
     <span>{{ downloadableFile.name }}</span>
 </td>
 <td>
@@ -20,7 +20,7 @@
 <td>
     <p>{{ downloadableFile.path }}</p>
 </td>
-<td>
+<td class="available-status-content">
+    <span [class.is-available]="downloadableFile.status === 'available'" class="available-status"></span> 
     <span>{{this.getStatusText(downloadableFile.status)}}</span>
-    <span [class.green-status]="downloadableFile.status === 'available'"></span> 
 </td>

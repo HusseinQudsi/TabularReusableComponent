@@ -35,7 +35,7 @@
 				"name": "$string",
 				"path": "$string",
 				"status": "$boolean"
-			},
+			}
 		],
 		"total": 5
 	}

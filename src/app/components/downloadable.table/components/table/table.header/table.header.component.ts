@@ -11,6 +11,6 @@ export class TableHeader implements OnInit {
 
   ngOnInit() {
 
-    this.tableHeader = ['Name', 'Device', 'Path', 'Status'];
+    this.tableHeader = ['', 'Name', 'Device', 'Path', 'Status'];
   }
 }
