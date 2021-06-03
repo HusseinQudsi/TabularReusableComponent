@@ -1,3 +1,26 @@
-<td>cell4</td>
-<td>cell5</td>
-<td>cell6</td>
+<td>
+    <span>
+        <input 
+            [checked]="downloadableFile.isChecked"
+            [disabled]="!(downloadableFile.status === 'available')"
+            [id]="downloadableFile.id" 
+            (change)="onChange(downloadableFile, $event)"
+            type="checkbox">
+        <label 
+            [for]="downloadableFile.id"
+            class="visuallyhidden" 
+            type="text">Downloadable File Status
+        </label>
+    </span>
+    <span>{{ downloadableFile.name }}</span>
+</td>
+<td>
+    <p>{{ downloadableFile.device }}</p>
+</td>
+<td>
+    <p>{{ downloadableFile.path }}</p>
+</td>
+<td>
+    <span>{{this.getStatusText(downloadableFile.status)}}</span>
+    <span [class.green-status]="downloadableFile.status === 'available'"></span> 
+</td>

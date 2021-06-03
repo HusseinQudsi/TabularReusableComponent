@@ -1,6 +1,5 @@
 import { Component, OnInit } from '@angular/core';
 
-
 @Component({
   selector: '[table-header]',
   templateUrl: './table.header.component.html',
@@ -8,15 +7,10 @@ import { Component, OnInit } from '@angular/core';
 })
 
 export class TableHeader implements OnInit {
-  title = 'Downloadable files table';
-  
-  constructor() { }
-
-  cashLeft() {
-  
-  }
+  tableHeader: String[];
 
   ngOnInit() {
-    
+
+    this.tableHeader = ['Name', 'Device', 'Path', 'Status'];
   }
 }

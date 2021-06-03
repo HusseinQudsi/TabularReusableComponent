@@ -48,8 +48,8 @@ export class DownloadableFilesService {
 
     this._downloadableFilesData = {
       errorState: false,
-      isSelectedAll: true,
-      selectedCount: downloadableFiles.total,
+      isSelectedAll: false,
+      selectedCount: 0,
       selectionItems,
     };
   }
@@ -94,7 +94,37 @@ export class DownloadableFilesService {
   initObservable(): Observable<any> {
     return this._subject.asObservable();
   }
-  // updateSelection(message: string) {
-  //   this._subject.next();
-  // }
+
+  selectAll(): void {
+    this._downloadableFilesData.selectionItems.forEach(item => {
+      if (item.status === 'available') item.isChecked = true;
+    });
+
+    this.updateSelection();
+  }
+
+  unSelectAll(): void {
+    this._downloadableFilesData.selectionItems.forEach(item => item.isChecked = false);
+    this.updateSelection();
+  }
+
+  updateSelection(downloadableItem?: DownloadableItem): void {
+
+    var selectedCount: number = 0;
+
+    this._downloadableFilesData.selectionItems.forEach(file => {
+      if (downloadableItem && file.id == downloadableItem.id) {
+        file.isChecked = downloadableItem.isChecked;
+      }
+      if (file.isChecked) selectedCount++;
+    });
+
+    this._downloadableFilesData.isSelectedAll = this.
+      _downloadableFilesData.selectionItems
+      .filter(file => file.status === 'available')
+      .length === selectedCount;
+
+    this._downloadableFilesData.selectedCount = selectedCount;
+    this._bindToView();
+  }
 }

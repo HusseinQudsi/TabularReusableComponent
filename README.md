@@ -1,6 +1,15 @@
 # TabularReusableComponent
 
-This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 11.2.9.
+This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 11.2.9 and [TypeScript](https://www.typescriptlang.org/) that demonstrates a tabular reusable component.
+
+## Getting started
+
+### Clone the repo
+
+```shell
+git clone https://github.com/ --- github repo ---
+cd tabular-reusable-component
+```
 
 ## Development server
 

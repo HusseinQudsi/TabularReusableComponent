@@ -6,7 +6,7 @@ export class DownloadableFile {
   status: string
 }
 
-export class DownloadableItem extends DownloadableFile {
+export class DownloadableItem extends DownloadableFile{
   isChecked: boolean
 }
 

@@ -1,0 +1,63 @@
+// TODO: Running out of time, remove RGB values and use shared variable for consistence please.
+.table-content {
+  border-radius: 10px;
+  box-shadow: 3px 3px 10px lightgrey;
+  margin: 100px auto;
+  padding: 50px 50px 30px 50px;
+  text-transform: capitalize;
+  width: 80%;
+}
+
+.selection-table {
+  padding: 10px;
+}
+
+.count-text {
+  padding: 0 15px;
+}
+
+.files-table {
+  border-collapse: collapse;
+  border-spacing: 0;
+  font-family: "Trebuchet MS", Arial, Helvetica, sans-serif;
+  font-size: 16px;
+  width: 100%;
+
+  th {
+    background-color: rgba(66, 166, 70, 0.6);
+    padding-bottom: 10px;
+    padding-top: 10px;
+  }
+
+  td,
+  th {
+    border: 1px solid darkgray;
+    padding: 10px;
+    text-align: left;
+  }
+}
+
+.files-table {
+
+  tr:nth-child(odd) {
+    background-color: rgba(66, 166, 70, 0.2);
+  }
+
+  tr:hover {
+    background-color: rgba(255, 173, 185, 0.5);
+  }
+
+  tr.is-selected {
+    background-color: rgba(155, 129, 0, 0.2);
+  }
+
+  tr.is-selected:hover {
+    background-color: rgba(155, 129, 0, 0.3);
+  }
+}
+
+.files-table {
+  .disable-checkbox:hover {
+    background-color: rgba(255, 173, 185, 0.1);
+  }
+}

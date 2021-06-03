@@ -1,9 +1,47 @@
-<table>
-  <thead>
-    <tr table-header></tr>
-  </thead>
-  <tbody *ngFor="let row of downloadableItems.selectionItems">
-    <h6>{{ row.name }}</h6>
-    <tr table-row></tr>
-  </tbody>
-</table>
+<section class="table-content">
+  <h1>
+    Tabular Reusable Component
+  </h1>
+  <!-- TODO: add error state UI -->
+  <div *ngIf="downloadableItems.errorState"></div>
+  <div *ngIf="!downloadableItems.errorState">
+    <!-- Start: File selection menu table -->
+    <table class="selection-table">
+      <caption class="visuallyhidden">File selection menu table</caption>
+      <tr>
+        <td>
+          <span>
+            <input [checked]="downloadableItems.isSelectedAll"
+              [disabled]="downloadableItems.selectionItems.length === 0" (change)="selectAll($event)" id="select-all"
+              type="checkbox">
+            <label for="select-all" class="visuallyhidden" type="text">Select all available downloads
+            </label>
+          </span>
+        </td>
+        <td>
+          <span class="count-text">{{getCountText()}}</span>
+        </td>
+        <td>
+          <button class="btn">
+            <i class="fa fa-download"></i> Download
+          </button>
+        </td>
+      </tr>
+    </table><!-- End: File selection menu table -->
+
+    <!-- Start: Downloadable files selection table -->
+    <table class="files-table">
+      <caption class="visuallyhidden">Downloadable files selection table</caption>
+      <thead>
+        <tr table-header></tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let downloadableItem of downloadableItems.selectionItems"
+          [class.disable-checkbox]="!(this.downloadableItem.status === 'available')" [class.is-selected]="this.downloadableItem.isChecked"
+          [downloadableFile]="downloadableItem" (click)="this.selectInput($event, downloadableItem)"
+          (inputChange)="onInputChange($event)" table-row>
+        </tr>
+      </tbody>
+    </table> <!-- End: Downloadable files selection table -->
+  </div>
+</section>
