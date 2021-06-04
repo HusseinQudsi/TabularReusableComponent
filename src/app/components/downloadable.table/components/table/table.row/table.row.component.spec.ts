@@ -1,14 +1,21 @@
-import { TestBed } from '@angular/core/testing';
+import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { TableRow } from './table.row.component';
 
-describe('DownloadableTable', () => {
-  beforeEach(async () => {
-    await TestBed.configureTestingModule({
-      declarations: [
-        TableRow
-      ],
-    }).compileComponents();
+describe('TableRow', () => {
+
+  let fixture: ComponentFixture<TableRow>;
+
+  beforeEach(() => {
+    TestBed.configureTestingModule({
+      declarations: [TableRow],
+    });
+
+    fixture = TestBed.createComponent(TableRow);
   });
 
-  // TODO: add UT here.
+  it('Component should be defined', () => {
+    expect(fixture.debugElement.componentInstance).toBeDefined();
+  });
+
+  // TODO: running out of time, please add remaining UT:
 });
