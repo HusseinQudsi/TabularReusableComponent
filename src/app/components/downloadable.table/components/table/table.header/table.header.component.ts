@@ -7,7 +7,7 @@ import { Component, OnInit } from '@angular/core';
 })
 
 export class TableHeader implements OnInit {
-  tableHeader: String[];
+  tableHeader: string[];
 
   ngOnInit() {
 

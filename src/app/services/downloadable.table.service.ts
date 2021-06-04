@@ -10,13 +10,14 @@ import { copyObject } from '../services/utilities.service';
 @Injectable()
 export class DownloadableFilesService {
   // Private properties:
-  private _downloadableFilesData: DownloadableItems;
-  private _loggerContext: string = 'Downloadable service:';
-  private _subject = new Subject<DownloadableItems>();
+  private downloadableFilesData: DownloadableItems;
+  private loggerContext: string = 'Downloadable service:';
+  private subject = new Subject<DownloadableItems>();
 
   // Private methods:
-  private _applyEmptyTable(): void {
-    this._downloadableFilesData = {
+  private applyEmptyTable(): void {
+    this.downloadableFilesData = {
+      // TODO: Adding empty state, if no error but the table is empty.
       errorState: true,
       isSelectedAll: false,
       selectedCount: 0,
@@ -32,8 +33,8 @@ export class DownloadableFilesService {
       ],
     };
   }
-  private _applyTable(downloadableFiles: ApiResponseModel): void {
-    let selectionItems: DownloadableItem[] = downloadableFiles
+  private applyTable(downloadableFiles: ApiResponseModel): void {
+    const selectionItems: DownloadableItem[] = downloadableFiles
       .result
       .map(file => {
         return {
@@ -41,12 +42,13 @@ export class DownloadableFilesService {
           name: file.name || '--',
           id: file.id || uuidv4(),
           isChecked: false,
-          path: file.path || '--',
+          path: file.path || '--', // TODO: We might need to use some regex to validated the file path. 
           status: file.status,
         };
       });
 
-    this._downloadableFilesData = {
+    // TODO: if selectionItems has too many items, we might need pagination.
+    this.downloadableFilesData = {
       errorState: false,
       isSelectedAll: false,
       selectedCount: 0,
@@ -58,24 +60,24 @@ export class DownloadableFilesService {
     let downloadableFilesContent: DownloadableItems;
 
     try {
-      downloadableFilesContent = copyObject(this._downloadableFilesData);
+      downloadableFilesContent = copyObject(this.downloadableFilesData);
     } catch (e) {
-      console.error(`${this._loggerContext} error parsing table data.`);
+      console.error(`${this.loggerContext} error parsing table data.`);
 
       // Populating error state table
-      this._applyEmptyTable();
+      this.applyEmptyTable();
       return this._bindToView();
     }
 
-    this._subject.next(downloadableFilesContent);
+    this.subject.next(downloadableFilesContent);
   }
 
   // Public properties:
   getAlertBoxContent(): string[] {
     return this
-      ._downloadableFilesData.selectionItems
+      .downloadableFilesData.selectionItems
       .filter(file => file.isChecked)
-      .map(file => `Path: ${file.path}. File: ${file.device}.`);
+      .map(file => `Path: ${file.path}. File: ${file.device}.\n`);
   }
 
   getDownloadableItems(): void {
@@ -83,35 +85,37 @@ export class DownloadableFilesService {
 
     if (!!downloadableFiles && !!Object.keys(downloadableFiles).length) {
 
-      this._applyTable(downloadableFiles);
+      this.applyTable(downloadableFiles);
 
     } else {
 
       // TODO: 
       // 1. add global logger service, log out error for reporting API return empty data.
       // 2. add feature flag for error out table, for testing etc.
-      console.error(`${this._loggerContext} API Error, returning empty data.`);
+      console.error(`${this.loggerContext} API Error, returning empty data.`);
 
-      this._applyEmptyTable();
+      this.applyEmptyTable();
     }
 
     this._bindToView();
   }
 
   initObservable(): Observable<any> {
-    return this._subject.asObservable();
+    return this.subject.asObservable();
   }
 
   selectAll(): void {
-    this._downloadableFilesData.selectionItems.forEach(item => {
-      if (item.status === 'available') item.isChecked = true;
+    this.downloadableFilesData.selectionItems.forEach(item => {
+      if (item.status === 'available') {
+        item.isChecked = true;
+      }
     });
 
     this.updateSelection();
   }
 
   unSelectAll(): void {
-    this._downloadableFilesData.selectionItems.forEach(item => item.isChecked = false);
+    this.downloadableFilesData.selectionItems.forEach(item => item.isChecked = false);
     this.updateSelection();
   }
 
@@ -119,19 +123,21 @@ export class DownloadableFilesService {
 
     let selectedCount: number = 0;
 
-    this._downloadableFilesData.selectionItems.forEach(file => {
-      if (downloadableItem && file.id == downloadableItem.id) {
+    this.downloadableFilesData.selectionItems.forEach(file => {
+      if (downloadableItem && file.id === downloadableItem.id) {
         file.isChecked = downloadableItem.isChecked;
       }
-      if (file.isChecked) selectedCount++;
+      if (file.isChecked) {
+        selectedCount++;
+      }
     });
 
-    this._downloadableFilesData.isSelectedAll = this.
-      _downloadableFilesData.selectionItems
+    this.downloadableFilesData.isSelectedAll = this.
+      downloadableFilesData.selectionItems
       .filter(file => file.status === 'available')
       .length === selectedCount;
 
-    this._downloadableFilesData.selectedCount = selectedCount;
+    this.downloadableFilesData.selectedCount = selectedCount;
     this._bindToView();
   }
 }

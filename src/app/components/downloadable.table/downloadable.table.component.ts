@@ -16,8 +16,8 @@ import { DownloadableFilesService } from '../../services/downloadable.table.serv
 export class DownloadableTable implements OnInit, OnDestroy {
   downloadableItems: DownloadableItems;
   subscription: Subscription;
-  subtitle: String;
-  title: String;
+  subtitle: string;
+  title: string;
 
   constructor(public downloadableFilesService: DownloadableFilesService) {
     this.subscription = this
@@ -31,7 +31,9 @@ export class DownloadableTable implements OnInit, OnDestroy {
   getCountText(): string {
     let selectedCount: number = this.downloadableItems.selectedCount;
 
-    return selectedCount === 0 ? 'None Selected' : `Selected ${selectedCount}`;
+    return selectedCount === 0 ?
+      'None Selected' :
+      `Selected ${selectedCount}`;
   }
 
   isSelectedAll(): boolean {
@@ -56,7 +58,9 @@ export class DownloadableTable implements OnInit, OnDestroy {
 
   openAlertBox(): void {
     let selectedFilesInfo: string[] = this.downloadableFilesService.getAlertBoxContent();
-    let selectedFilesInfoText = selectedFilesInfo.length ? selectedFilesInfo.join('\n') : 'Please select a path';
+    let selectedFilesInfoText = selectedFilesInfo.length ?
+      selectedFilesInfo.join('\n') :
+      'Please select a path';
 
     alert(selectedFilesInfoText);
   }

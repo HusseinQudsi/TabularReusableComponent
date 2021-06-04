@@ -11,11 +11,11 @@ export class TableRow {
   @Input() downloadableFile: DownloadableItem;
   @Output() inputChange: EventEmitter<DownloadableItem> = new EventEmitter();
 
-  getStatusText(status: string) {
-    return status == 'available' ? 'available' : 'scheduled';
+  getStatusText(status: string): string {
+    return status === 'available' ? 'available' : 'scheduled';
   }
 
-  onChange(downloadableFile: DownloadableItem, event: Event) {
+  onChange(downloadableFile: DownloadableItem, event: Event): void {
 
     let target = event.target as HTMLInputElement;
 

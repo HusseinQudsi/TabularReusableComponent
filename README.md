@@ -1,36 +1,48 @@
-# TabularReusableComponent
+# tabular-reusable-component
 
-This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 11.2.9 and [TypeScript](https://www.typescriptlang.org/) that demonstrates a tabular reusable component.
+This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 11.2.9 using [TypeScript](https://www.typescriptlang.org/) that demonstrates a tabular reusable component.
 
 ## Getting started
 
 ### Clone the repo
 
 ```shell
-git clone https://github.com/ --- github repo ---
+git clone https://github.com/HusseinQudsi/TabularReusableComponent
 cd tabular-reusable-component
 ```
 
-## Development server
+### Install npm packages
+
+Install the `npm` packages described in the `package.json` and verify that it works:
+
+```shell
+npm install
+```
+
+### Development server
 
 Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`. The app will automatically reload if you change any of the source files.
 
-## Code scaffolding
+#### npm scripts
 
-Run `ng generate component component-name` to generate a new component. You can also use `ng generate directive|pipe|service|class|guard|interface|enum|module`.
+These are the most useful commands defined in `package.json`:
 
-## Build
+* `npm start` - runs the TypeScript compiler, asset copier, and a server at the same time, all three in "watch mode".
+* `npm run build` - runs the TypeScript compiler and asset copier once.
+* `npm run lint` - runs `tslint` on the project files.
 
-Run `ng build` to build the project. The build artifacts will be stored in the `dist/` directory. Use the `--prod` flag for a production build.
+These are the test-related scripts:
 
-## Running unit tests
-
-Run `ng test` to execute the unit tests via [Karma](https://karma-runner.github.io).
-
-## Running end-to-end tests
-
-Run `ng e2e` to execute the end-to-end tests via [Protractor](http://www.protractortest.org/).
+* `npm test` - builds the application and runs Intern tests (both unit and functional) one time.
 
 ## Further help
 
 To get more help on the Angular CLI use `ng help` or go check out the [Angular CLI Overview and Command Reference](https://angular.io/cli) page.
+
+## Contributing
+Pull requests are welcome. For major changes, please open an issue first to discuss what you would like to change.
+
+Please make sure to update tests as appropriate.
+
+## License
+[MIT](https://choosealicense.com/licenses/mit/)

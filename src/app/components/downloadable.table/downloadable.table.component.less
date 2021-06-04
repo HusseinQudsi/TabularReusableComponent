@@ -1,9 +1,7 @@
-@primary-blue: #1C5679;
-@primary-beige: #BBB592;
-@hover-beige: #CAC3B2;
-@temp-1: #808C5C;
-@temp-2: #5F4B3B;
-
+// TODO: 
+// - Running out of time, remove all element styling and use classes:
+// - Break out colors into variable then own partials.
+@row-selectable-hover: #69B7CE;
 
 .table-content {
   background-color: beige;
@@ -61,7 +59,8 @@
   }
 
   tr:hover {
-    background-color: #69B7CE;
+    background-color: @row-selectable-hover;
+    cursor: pointer;
   }
 
   tr.is-selected {
@@ -76,6 +75,7 @@
 .files-table {
   .disable-checkbox:hover {
     background-color: rgba(255, 173, 185, 0.1);
+    cursor: not-allowed;
   }
 
   .disable-checkbox:hover {
